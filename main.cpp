@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <cstring>
 #include <iostream>
+#include <fstream>
 int learning[10][25][2] = {0};
 int data[25] = {0};
 void learn(int num){
@@ -42,6 +43,12 @@ int read(){
 	return(max[1]);
 			
 }
+void save(){
+	std::ofstream file;
+	file.open("memory");
+	file << learning;
+	file.close();
+}
 int main(){
 	bool quit = false;
 	int tempkey;	
@@ -50,19 +57,20 @@ int main(){
 	std::cin >> tempkey;
 	switch(tempkey){
 		case 1:
-			printf("Draw a number between 0 and 9, the number being 5x5 and a 1 being a full box and a 0 being an empty box\n");
-			for(int i = 0; i < 25; i++){
-				std::cin >> data[i];
+			printf("Draw a number 5x5 space seperated 1 being a full box and a 0 being an empty box\n");
+			for(int i = 0; i < 25; i+=5){
+				std::cin >> data[i] >> data[i+1] >> data[i+2] >> data[i+3] >> data[i+4];
 			}	
 			printf("Enter in what number you drew\n");
 			std::cin >> tempkey;
 			learn(tempkey);
+			save();
 			break;
 		case 2:
-			printf("Draw a number between 0 and 9, the number being 5x5 and a 1 being a full box and a 0 being an empty box \n");
-			for(int i = 0; i < 25; i++){
-			std::cin >> data[i];
-			}
+			printf("Draw a number 5x5 space seperated 1 being a full box and a 0 being an empty box\n");
+                        for(int i = 0; i < 25; i+=5){
+                                std::cin >> data[i] >> data[i+1] >> data[i+2] >> data[i+3] >> data[i+4];
+                        }
 			tempkey = read();
 			printf("The number %d was read, what was the correct number?\n",tempkey);
 			std::cin >> tempkey;
