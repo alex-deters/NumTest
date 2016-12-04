@@ -66,6 +66,19 @@ void load(){
 		}	
 	}
 }
+void align(){
+	for(int i = 0; i < 5; i++){
+		for(int i = 0; i < 5; i++){
+			if(data[4-i] == 0 && data[9-i] == 0 && data[14-i] == 0 && data[19-i] == 0 && data[24-i] == 0){
+				data[4-i] = data[3-i];
+				data[9-i] = data[8-i];
+				data[14-i] = data[13-i];
+				data[19-i] = data[18-i];
+				data[24-i] = data[23-i];
+			}
+		}
+	}
+}
 int main(){
 	load();
 	bool quit = false;
@@ -81,6 +94,7 @@ int main(){
 			}	
 			printf("Enter in what number you drew\n");
 			std::cin >> tempkey;
+			align();
 			learn(tempkey);
 			save();
 			break;
@@ -89,6 +103,7 @@ int main(){
                         for(int i = 0; i < 25; i+=5){
                                 std::cin >> data[i] >> data[i+1] >> data[i+2] >> data[i+3] >> data[i+4];
                         }
+			align();
 			tempkey = read();
 			printf("The number %d was read, what was the correct number?\n",tempkey);
 			std::cin >> tempkey;
