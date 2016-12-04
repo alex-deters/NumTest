@@ -46,10 +46,28 @@ int read(){
 void save(){
 	std::ofstream file;
 	file.open("memory");
-	file << learning;
+	for(int n = 0; n < 10; n++){
+		for(int i = 0; i < 25; i++){
+			for(int x = 0; x < 2; x++){
+				file << learning[n][i][x] << std::endl;
+			}
+		}
+	}
 	file.close();
 }
+void load(){
+	std::ifstream file;
+	file.open("memory");
+	for(int n = 0; n < 10; n++){
+		for(int i = 0; i < 25; i++){
+			for(int x = 0; x < 2; x++){
+				file >> learning[n][i][x];
+			}
+		}	
+	}
+}
 int main(){
+	load();
 	bool quit = false;
 	int tempkey;	
 	while(!quit){
