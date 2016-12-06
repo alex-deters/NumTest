@@ -4,6 +4,11 @@
 #include <fstream>
 int learning[10][25][2] = {0};
 int data[25] = {0};
+void draw(int num){
+	for(int i = 0; i < 25; i+=5){
+		printf("%d %d %d %d %d\n",i,i+1,i+2,i+3,i+4);	
+	}
+}
 void learn(int num, bool fair){
 	if(fair){
 		for(int n = 0; n < 10; n++){
