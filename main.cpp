@@ -4,7 +4,16 @@
 #include <fstream>
 int learning[10][25][2] = {0};
 int data[25] = {0};
-void learn(int num){
+void learn(int num, bool fair){
+	if(fair){
+		for(int n = 0; n < 10; n++){
+			for(int i = 0; i < 25; i++){
+				if(n != num){
+					learning[n][i][1]++;
+				}
+			}
+		}
+	}
 	for(int i = 0; i < 25; i++){
 		if(data[i] == learning[num][i][0]){
 			learning[num][i][1] += 1;
@@ -95,7 +104,7 @@ int main(){
 			printf("Enter in what number you drew\n");
 			std::cin >> tempkey;
 			align();
-			learn(tempkey);
+			learn(tempkey,false);
 			save();
 			break;
 		case 2:
@@ -107,7 +116,7 @@ int main(){
 			tempkey = read();
 			printf("The number %d was read, what was the correct number?\n",tempkey);
 			std::cin >> tempkey;
-			learn(tempkey);
+			learn(tempkey,true);
 			break;
 		default:
 			break;
