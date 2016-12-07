@@ -6,7 +6,7 @@ int learning[10][25][2] = {0};
 int data[25] = {0};
 void draw(int num){
 	for(int i = 0; i < 25; i+=5){
-		printf("%d %d %d %d %d\n",i,i+1,i+2,i+3,i+4);	
+		printf("%d %d %d %d %d\n",learning[num][i][0],learning[num][i+1][0],learning[num][i+2][0],learning[num][i+3][0],learning[num][i+4][0]);	
 	}
 }
 void learn(int num, bool fair){
@@ -81,16 +81,16 @@ void load(){
 	}
 }
 void align(){
+	
 	for(int i = 0; i < 5; i++){
-		for(int i = 0; i < 5; i++){
-			if(data[4-i] == 0 && data[9-i] == 0 && data[14-i] == 0 && data[19-i] == 0 && data[24-i] == 0){
-				data[4-i] = data[3-i];
-				data[9-i] = data[8-i];
-				data[14-i] = data[13-i];
-				data[19-i] = data[18-i];
-				data[24-i] = data[23-i];
+		if(data[4-i] == 0 && data[9-i] == 0 && data[14-i] == 0 && data[19-i] == 0 && data[24-i] == 0){
+			for(int n = 4; n >= 0; n--){		
+				data[n-i] = data[n-1-i];
+				data[n+5-i] = data[n+4-i]; data[n+10-i] = data[n+9-i]; data[n+15-i] = data[n+14-i];
+				data[n+20-i] = data[n+19-i];
 			}
-		}
+		}	
+	
 	}
 }
 int main(){
@@ -98,7 +98,7 @@ int main(){
 	bool quit = false;
 	int tempkey;	
 	while(!quit){
-	printf("Select an option:\n1: Full learning mode\n2: Read mode\n");
+	printf("Select an option:\n1: Full learning mode\n2: Read mode\n3: Draw mode\n");
 	std::cin >> tempkey;
 	switch(tempkey){
 		case 1:
@@ -108,7 +108,6 @@ int main(){
 			}	
 			printf("Enter in what number you drew\n");
 			std::cin >> tempkey;
-			align();
 			learn(tempkey,false);
 			save();
 			break;
@@ -117,12 +116,15 @@ int main(){
                         for(int i = 0; i < 25; i+=5){
                                 std::cin >> data[i] >> data[i+1] >> data[i+2] >> data[i+3] >> data[i+4];
                         }
-			align();
 			tempkey = read();
 			printf("The number %d was read, what was the correct number?\n",tempkey);
 			std::cin >> tempkey;
 			learn(tempkey,true);
 			break;
+		case 3:
+			printf("Select a number to draw (0-9)\n");
+			std::cin >> tempkey;
+			draw(tempkey);
 		default:
 			break;
 	}
